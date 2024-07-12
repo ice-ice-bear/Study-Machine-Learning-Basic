@@ -31,11 +31,7 @@ import matplotlib.pyplot as plt
 from sklearn.model_selection import train_test_split
 from sklearn.neighbors import KNeighborsRegressor
 from sklearn.metrics import mean_absolute_error
-```
 
-
-
-```python
 # 데이터 준비
 # 퍼치 물고기의 길이 데이터
 perch_length = np.array(
@@ -57,61 +53,30 @@ perch_weight = np.array(
      820.0, 850.0, 900.0, 1015.0, 820.0, 1100.0, 1000.0, 1100.0,
      1000.0, 1000.0]
 )
-```
 
-#### 데이터 준비
-
-퍼치 물고기의 길이와 무게 데이터를 각각 `perch_length`와 `perch_weight` 배열로 준비합니다.
-
-```python
 # 데이터 시각화
 # 길이와 무게 데이터를 산점도로 표시
 plt.scatter(perch_length, perch_weight)
 plt.xlabel('length')  # x축 라벨
 plt.ylabel('weight')  # y축 라벨
 plt.show()
-```
 
-#### 데이터 시각화
-
-길이와 무게 데이터를 산점도로 표시하여 데이터의 분포를 시각적으로 확인합니다.
-
-```python
 # 데이터 분할
 # train_test_split 함수를 사용하여 데이터를 훈련 세트와 테스트 세트로 분리
 train_input, test_input, train_target, test_target = train_test_split(
     perch_length, perch_weight, random_state=42
 )
-```
 
-#### 데이터 분할
-
-`train_test_split` 함수를 사용하여 데이터를 훈련 세트와 테스트 세트로 분리합니다. `random_state`를 설정하여 실행할 때마다 동일하게 데이터를 분할할 수 있도록 합니다.
-
-```python
 # 데이터 변환
 # 1차원 배열을 2차원 배열로 변환
 train_input = train_input.reshape(-1, 1)
 test_input = test_input.reshape(-1, 1)
 
-```
-
-#### 데이터 변환
-
-1차원 배열을 2차원 배열로 변환합니다. 이는 scikit-learn의 회귀 모델이 2차원 배열을 입력으로 받기 때문입니다. `reshape(-1, 1)`을 사용하여 배열을 변환합니다.
-
-```python
 # k-최근접 이웃 회귀 모델 생성 및 훈련
 # 기본 이웃 수(k=5)를 사용하여 모델 생성
 knr = KNeighborsRegressor()
 knr.fit(train_input, train_target)
-```
 
-#### k-최근접 이웃 회귀 모델 생성 및 훈련
-
-기본 이웃 수(k=5)를 사용하여 `KNeighborsRegressor` 모델을 생성하고, `fit` 메서드를 사용하여 모델을 훈련합니다.
-
-```python
 # 모델 평가
 # 테스트 세트에 대한 예측 생성
 test_prediction = knr.predict(test_input)
@@ -127,11 +92,25 @@ print(f'Train R^2: {train_score}')
 print(f'Test R^2: {test_score}')
 ```
 
+### 코드 설명
+
+#### 데이터 준비
+퍼치 물고기의 길이와 무게 데이터를 각각 `perch_length`와 `perch_weight` 배열로 준비합니다.
+
+#### 데이터 시각화
+길이와 무게 데이터를 산점도로 표시하여 데이터의 분포를 시각적으로 확인합니다.
+
+#### 데이터 분할
+`train_test_split` 함수를 사용하여 데이터를 훈련 세트와 테스트 세트로 분리합니다. `random_state`를 설정하여 실행할 때마다 동일하게 데이터를 분할할 수 있도록 합니다.
+
+#### 데이터 변환
+1차원 배열을 2차원 배열로 변환합니다. 이는 scikit-learn의 회귀 모델이 2차원 배열을 입력으로 받기 때문입니다. `reshape(-1, 1)`을 사용하여 배열을 변환합니다.
+
+#### k-최근접 이웃 회귀 모델 생성 및 훈련
+기본 이웃 수(k=5)를 사용하여 `KNeighborsRegressor` 모델을 생성하고, `fit` 메서드를 사용하여 모델을 훈련합니다.
+
 #### 모델 평가
-
 테스트 세트에 대한 예측을 생성하고, `mean_absolute_error` 함수를 사용하여 평균 절댓값 오차(MAE)를 계산합니다. 또한, 훈련 세트와 테스트 세트에 대한 결정계수(R²)를 계산하여 모델의 성능을 평가합니다.
-
-
 
 ### 요약
 이 예제에서는 k-최근접 이웃 회귀를 사용하여 물고기의 길이와 무게 데이터를 기반으로 모델을 학습시키고 평가했습니다. 주요 개념과 사이킷런의 핵심 함수를 활용하여 회귀 문제를 해결하는 방법을 배웠습니다.
